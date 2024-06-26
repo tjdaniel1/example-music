@@ -6,6 +6,7 @@ import com.example.demo.domain.entity.Music;
 import com.example.demo.domain.request.MusicRequest;
 import com.example.demo.domain.response.MusicResponse;
 import com.example.demo.domain.type.Genre;
+import com.example.demo.respository.MusicDao;
 import com.example.demo.respository.MusicRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,8 +15,15 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class MusicServiceImpl implements MusicService {
+public class MusicServiceImpl implements MusicService, MusicDao {
     private final MusicRepository musicRepository;
+    @Override
+    public List<MusicResponse> search(MusicSearchDto searchDto) {
+        if(StringUtil.notNullNorEmpty(searchDto.artist())) return getMusicByArtistContaining(searchDto.artist());
+        if(StringUtil.notNullNorEmpty(searchDto.title())) return getMusicByTitleContaining(searchDto.title());
+        if(StringUtil.notNullNorEmpty(searchDto.genre())) return getMusicByGenre(searchDto.genre());
+        return getAll();
+    }
 
     @Override
     public void addMusic(MusicRequest musicRequest) {
@@ -44,13 +52,7 @@ public class MusicServiceImpl implements MusicService {
         musicRepository.deleteById(id);
     }
 
-    @Override
-    public List<MusicResponse> search(MusicSearchDto searchDto) {
-        if(StringUtil.notNullNorEmpty(searchDto.artist())) return getMusicByArtistContaining(searchDto.artist());
-        if(StringUtil.notNullNorEmpty(searchDto.title())) return getMusicByTitleContaining(searchDto.title());
-        if(StringUtil.notNullNorEmpty(searchDto.genre())) return getMusicByGenre(searchDto.genre());
-        return getAll();
-    }
+
 
     @Override
     public List<MusicResponse> getMusicByTitleContaining(String name) {

@@ -7,7 +7,8 @@ import com.example.demo.domain.response.UserResponse;
 
 import java.util.List;
 
-public interface UserService {
-    List<UserResponse> getAll();
+public interface AuthService {
+    void signup(SignupRequest signupRequest);
+    TokenResponse login(SigninRequest signinRequest);
 
 }

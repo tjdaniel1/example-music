@@ -35,10 +35,14 @@ public class PlayListServiceImpl implements PlayListService{
     @Override
     public void updatePlayListById(Long id, PlayListRequest playListRequest) {
         // TODO: 구현 필요
+        PlayList playList = playListRepository.findById(id).orElseThrow();
+
+
     }
     @Override
     public List<PlayListResponse> getPlayListByNameContaining(String name) {
-        return playListRepository.findByNameContaining(name)
+        return playListRepository
+                .findByNameContaining(name)
                 .stream()
                 .map(PlayListResponse::from)
                 .toList();
@@ -52,7 +56,8 @@ public class PlayListServiceImpl implements PlayListService{
     }
     @Override
     public List<PlayListResponse> getAll() {
-        return playListRepository.findAll()
+        return playListRepository
+                .findAll()
                 .stream()
                 .map(PlayListResponse::from)
                 .toList();
@@ -60,7 +65,8 @@ public class PlayListServiceImpl implements PlayListService{
 
     @Override
     public List<PlayListResponse> myPlayList(User user) {
-        return playListRepository.findByUser(user)
+        return playListRepository
+                .findByUser(user)
                 .stream()
                 .map(PlayListResponse::from)
                 .toList();

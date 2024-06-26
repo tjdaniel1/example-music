@@ -20,16 +20,19 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService, UserDetailsService {
+public class UserServiceImpl implements UserService, AuthService {
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtUtil jwtUtil;
-    @Override
+
+
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userRepository
                 .findByUsername(username)
                 .orElseThrow(()-> new UsernameNotFoundException("User not found"));
     }
+
     @Override
     @Transactional
     public void signup(SignupRequest request) {
@@ -39,6 +42,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         User user = request.toEntity(encodedPassword);
         userRepository.save(user);
     }
+
     @Override
     public TokenResponse login(SigninRequest request) {
         Optional<User> byEmail = userRepository.findByEmail(request.email());

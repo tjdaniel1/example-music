@@ -1,6 +1,5 @@
 package com.example.demo.domain.response;
 
-import com.example.demo.domain.entity.Music;
 import com.example.demo.domain.entity.PlayList;
 
 import java.util.List;

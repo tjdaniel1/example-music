@@ -13,9 +13,6 @@ public interface MusicService {
     void deleteMusicById(Long id);
 
     List<MusicResponse> search(MusicSearchDto searchDto);
-    List<MusicResponse> getAll();
-    List<MusicResponse> getMusicByTitleContaining(String name);
-    List<MusicResponse> getMusicByArtistContaining(String singer);
-    List<MusicResponse> getMusicByGenre(String genre);
+
 
 }

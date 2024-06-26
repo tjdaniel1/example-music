@@ -24,10 +24,12 @@ public class MusicController {
     public void addMusic(@RequestBody MusicRequest request){
         musicService.addMusic(request);
     }
+
     @DeleteMapping("/api/v1/musics/{id}")
     public void deleteMusic(@PathVariable Long id){
         musicService.deleteMusicById(id);
     }
+
     @GetMapping("/api/v1/musics/{id}")
     public MusicResponse getMusic(@PathVariable Long id){
         return musicService.getMusicById(id);
