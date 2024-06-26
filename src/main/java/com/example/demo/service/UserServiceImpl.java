@@ -45,7 +45,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         if(byEmail.isEmpty() ||
                 !passwordEncoder.matches(request.password(), byEmail.get().getPassword()))
             throw new IllegalArgumentException();
-        String token = jwtUtil.generateToken(request.email());
+        String token = jwtUtil.generateToken(byEmail.get().getUsername());
         return TokenResponse.from(token);
     }
 

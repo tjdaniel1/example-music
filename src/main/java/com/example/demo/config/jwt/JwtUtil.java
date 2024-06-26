@@ -14,9 +14,9 @@ public class JwtUtil {
     private final Long expiration;
     private final SecretKey secretKey;
 
-    public String generateToken(String email){
+    public String generateToken(String username){
         String token = Jwts.builder()
-                .subject(email)
+                .subject(username)
                 .expiration(new Date(System.currentTimeMillis() + expiration))
                 .signWith(secretKey)
                 .compact();

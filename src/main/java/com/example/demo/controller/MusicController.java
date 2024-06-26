@@ -21,7 +21,7 @@ public class MusicController {
         return musicService.search(searchDto);
     }
     @PostMapping("/api/v1/musics")
-    public void addMusic(MusicRequest request){
+    public void addMusic(@RequestBody MusicRequest request){
         musicService.addMusic(request);
     }
     @DeleteMapping("/api/v1/musics/{id}")

@@ -22,8 +22,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String bearerToken = request.getHeader("Authorization");
-        if(bearerToken != null && bearerToken.startsWith("jwt ")){
-            String token = bearerToken.substring(4);
+        if(bearerToken != null && bearerToken.startsWith("Bearer ")){
+            String token = bearerToken.substring(7);
             // token 까서(jwtUtil)
             String email = jwtUtil.getByEmailFromTokenAndValidate(token);
             // userdetails 생성(authservice)
